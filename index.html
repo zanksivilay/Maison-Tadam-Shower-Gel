@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison TADAM | Tamarind & Turmeric Shower Gel</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+Lao:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f7f4ef;
+            --card-bg: #ffffff;
+            --text-dark: #2b2623;
+            --text-muted: #6e675f;
+            --accent-warm: #8c5a3c;
+            --border-color: #e5dec9;
+            --font-brand: 'Cormorant Garamond', serif;
+            --font-body: 'Plus Jakarta Sans', 'Noto Sans Lao', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-container {
+            max-width: 1050px;
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Luxury Brand Title */
+        .brand-title {
+            font-family: var(--font-brand);
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Text-Only Language Buttons */
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background-color: var(--accent-warm);
+            color: #fff;
+            border-color: var(--accent-warm);
+        }
+
+        /* Main Hero Layout */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Image Gallery Styling */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Zoom Container */
+        .main-image-box {
+            position: relative;
+            background: radial-gradient(circle, #ffffff 0%, var(--bg-color) 70%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: zoom-in;
+            height: 420px;
+        }
+
+        .main-image-box img {
+            max-width: 80%;
+            max-height: 360px;
+            object-fit: contain;
+            filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.06));
+            transition: transform 0.2s ease-out;
+            transform-origin: center center;
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            padding: 4px 8px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* 4 Thumbnails Grid */
+        .thumbnail-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumb {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 6px;
+            cursor: pointer;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .thumb:hover, .thumb.active {
+            border-color: var(--accent-warm);
+            box-shadow: 0 2px 8px rgba(140, 90, 60, 0.2);
+        }
+
+        .thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Product Details */
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .badge {
+            align-self: flex-start;
+            background-color: #eae3d2;
+            color: var(--accent-warm);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        /* Title updated to use standard body/ingredients font */
+        .product-title {
+            font-family: var(--font-body);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--accent-warm);
+            font-weight: 500;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Specs Bar Aligned: Left, Middle, Right */
+        .specs-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            width: 100%;
+        }
+
+        .specs-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .specs-item.center {
+            text-align: center;
+        }
+
+        .specs-item.right {
+            text-align: right;
+        }
+
+        /* Sections Grid */
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .ingredient-item {
+            margin-bottom: 20px;
+        }
+
+        .ingredient-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .ingredient-name {
+            font-weight: 600;
+            color: var(--accent-warm);
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Slogan updated to use standard body/ingredients font */
+        .slogan {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            color: var(--accent-warm);
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .lang-la {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <!-- Header -->
+    <header>
+        <div class="brand-title">MAISON TADAM</div>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('la')">LA</button>
+        </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <section class="hero">
+        <!-- Photo Gallery with Zoom -->
+        <div class="gallery-container">
+            <div class="main-image-box" id="zoom-box">
+                <img id="current-img" src="Cover all Front 012 - Dark Brown.png" alt="Maison TADAM Shower Gel">
+                <span class="zoom-hint">🔍 Hover to zoom</span>
+            </div>
+            
+            <div class="thumbnail-list">
+                <div class="thumb active" onclick="switchImage('Cover all Front 012 - Dark Brown.png', this)">
+                    <img src="Cover all Front 012 - Dark Brown.png" alt="Front view">
+                </div>
+                <div class="thumb" onclick="switchImage('Cover all Back 012 - Dark Brown.png', this)">
+                    <img src="Cover all Back 012 - Dark Brown.png" alt="Back view">
+                </div>
+                <div class="thumb" onclick="switchImage('Copy of for cleanliness.png', this)">
+                    <img src="Copy of for cleanliness.png" alt="Product detail view">
+                </div>
+                <div class="thumb" onclick="switchImage('Women with pumping.png', this)">
+                    <img src="Women with pumping.png" alt="In-use pump view">
+                </div>
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="product-details">
+            <span class="badge lang-en">New Product</span>
+            <span class="badge lang-la">ສິນຄ້າໃຫມ່</span>
+
+            <h1 class="product-title lang-en">Tamarind & Turmeric Shower Gel</h1>
+            <h1 class="product-title lang-la">ເຈລອາບນ້ຳ ໝາກຂາມ x ຂີ້ມິ້ນ</h1>
+
+            <p class="subtitle lang-en">Pure. Natural. Gentle on Sensitive Skin.</p>
+            <p class="subtitle lang-la">ບໍລິສຸດ ທຳມະຊາດ ອ່ອນໂຍນຕໍ່ຜິວແພ້ງ່າຍ</p>
+
+            <p class="description lang-en">
+                Turn your everyday shower into a soothing spa ritual. Infused with the goodness of Tamarind and Turmeric, this rich botanical gel purifies and nourishes your skin, leaving it deeply hydrated, silky-smooth, and delicately scented with rice milk.
+                <br><br>
+                Formulated at the skin-friendly pH of 5.5, it's gentle enough for daily use — even for the most sensitive skin.
+            </p>
+            <p class="description lang-la">
+                ປ່ຽນການອາບນ້ຳປະຈຳວັນຂອງທ່ານໃຫ້ກາຍເປັນຄວາມຜ່ອນຄາຍ. ອຸດົມໄປດ້ວຍສານສະກັດຈາກໝາກຂາມ ແລະ ຂີ້ມິ້ນ, ເຈລອາບນ້ຳສູດເຂັ້ມຂົ້ນນີ້ຊ່ວຍທຳຄວາມສະອາດ ແລະ ບຳລຸງຜິວ, ໃຫ້ຄວາມຊຸ່ມຊື່ນເລິກເຖິງຊັ້ນຜິວ ພ້ອມກັບຄວາມນຸ້ມນວນດັ່ງແພ, ມາພ້ອມກັບກິ່ນຫອມນ້ຳນົມເຂົ້າອັນເປັນເອກະລັກ.
+                <br><br>
+                ດ້ວຍສູດ pH 5.5 ທີ່ເໝາະສົມກັບຜິວ, ອ່ອນໂຍນພຽງພໍສຳລັບການໃຊ້ທຸກໆວັນ — ເໝາະສຳລັບຜິວແພ້ງ່າຍທີ່ສຸດ.
+            </p>
+
+            <!-- Specs Bar: Left, Center, Right Alignment -->
+            <div class="specs-bar">
+                <div class="specs-item left">🌿 ປະລິມານ 500 ml</div>
+                <div class="specs-item center">🌾 <span class="lang-en">Scent of Rice Milk</span><span class="lang-la">ກິ່ນຫອມນ້ຳນົມເຂົ້າ</span></div>
+                <div class="specs-item right">✨ pH 5.5</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients & Instructions -->
+    <section class="section-grid">
+        <div class="card">
+            <h2 class="card-title lang-en">🌿 Our Key Ingredients</h2>
+            <h2 class="card-title lang-la">🌿 ສ່ວນປະກອບຂອງພວກເຮົາ</h2>
+
+            <!-- Tamarind -->
+            <div class="ingredient-item">
+                <div class="ingredient-name lang-en">Tamarind (Tamarindus Indica)</div>
+                <div class="ingredient-name lang-la">ໝາກຂາມ (Tamarindus Indica)</div>
+                <p class="description lang-en">Naturally rich in AHA (Alpha Hydroxy Acids) and antioxidants, Tamarind gently exfoliates away dead skin cells, sweeping away dullness to reveal a brighter, smoother, and more even skin tone. Its natural fruit acids work gently yet effectively, refining skin texture with each use while helping to unclog pores and boost skin's natural renewal process — for a fresher, more radiant complexion over time.</p>
+                <p class="description lang-la">ອຸດົມໄປດ້ວຍສານ AHA (Alpha Hydroxy Acids) ແລະ ສານຕ້ານອະນຸມູນອິດສະລະຕາມທຳມະຊາດ, ໝາກຂາມຊ່ວຍຂັດເອົາເຊວຜິວທີ່ຕາຍແລ້ວອອກຢ່າງອ່ອນໂຍນ, ກຳຈັດຄວາມໝົ່ນໝອງອອກຈາກຜິວ ເປີດເຜີຍຜິວທີ່ສົດໃສ, ນຸ້ມນວນ ແລະ ສີຜິວທີ່ສະໝ່ຳສະເໝີກວ່າເກົ່າ. ສານຈາກໝາກໄມ້ທຳມະຊາດເຮັດວຽກຢ່າງອ່ອນໂຍນແຕ່ມີປະສິດທິພາບ, ຊ່ວຍປັບໂຄງສ້າງຜິວໃຫ້ລະອຽດຂຶ້ນໃນທຸກຄັ້ງທີ່ໃຊ້ ພ້ອມທັງຊ່ວຍເປີດຮູຂຸມຂົນທີ່ອຸດຕັນ ແລະ ກະຕຸ້ນຂະບວນການຟື້ນຟູຜິວຕາມທຳມະຊາດ ເຮັດໃຫ້ສົດຊື່ນ ແລະ ເປັ່ງປະກາຍຂຶ້ນເລື້ອຍໆ.</p>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
+
+            <!-- Turmeric -->
+            <div class="ingredient-item">
+                <div class="ingredient-name lang-en">Turmeric (Curcuma Longa)</div>
+                <div class="ingredient-name lang-la">ຂີ້ມິ້ນ (Curcuma Longa)</div>
+                <p class="description lang-en">Packed with powerful anti-inflammatory and antioxidant properties, Turmeric helps calm skin irritation and redness, soothing sensitive or stressed skin. Long valued in traditional skincare, it enhances natural radiance from within, evens out skin tone, and protects against environmental stressors such as pollution and free radicals — leaving skin looking healthier, calmer, and naturally glowing.</p>
+                <p class="description lang-la">ອຸດົມໄປດ້ວຍຄຸນສົມບັດຕ້ານການອັກເສບ ແລະ ຕ້ານອະນຸມູນອິດສະລະທີ່ມີປະສິດທິພາບສູງ, ຂີ້ມິ້ນຊ່ວຍບັນເທົາການລະຄາຍເຄືອງ ແລະ ຄວາມແດງຂອງຜິວ, ປອບປະລົມຜິວທີ່ແພ້ງ່າຍ ຫຼືຜິວທີ່ຖືກກະທົບຈາກແຮງສຽດທານ. ຂີ້ມິ້ນເປັນສ່ວນປະກອບທີ່ຖືກນຳໃຊ້ໃນການບຳລຸງຜິວແບບດັ້ງເດີມມາຍາວນານ, ຊ່ວຍເສີມສ້າງຄວາມສົດໃສຈາກພາຍໃນ, ປັບສີຜິວໃຫ້ສະໝ່ຳສະເໝີ, ປົກປ້ອງຜິວຈາກມົນລະພິດ ແລະ ອະນຸມູນອິດສະລະຈາກສະພາບແວດລ້ອມ ໃຫ້ຜິວທີ່ເບິ່ງແຂງແຮງ ແລະ ເປັ່ງປະກາຍຕາມທຳມະຊາດ.</p>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
+
+            <!-- Rice Milk -->
+            <div class="ingredient-item">
+                <div class="ingredient-name lang-en">Rice Milk (Oryza Sativa)</div>
+                <div class="ingredient-name lang-la">ນ້ຳນົມເຂົ້າ (Oryza Sativa)</div>
+                <p class="description lang-en">Treasured for centuries in traditional beauty rituals, Rice Milk carries a soft, milky-sweet scent that lingers gently on the skin — warm, comforting, and irresistibly soothing. Beyond its signature fragrance, it's rich in vitamins, amino acids, and natural antioxidants that nourish and soften skin, leaving it silky smooth with a delicate aroma that lasts long after your shower.</p>
+                <p class="description lang-la">ກິ່ນຫອມນຸ້ມນວນຫວານດັ່ງນ້ຳນົມ ທີ່ຈະປ່ຽນທຸກການອາບນ້ຳໃຫ້ກາຍເປັນຄວາມຜ່ອນຄາຍ. ນ້ຳນົມເຂົ້າບໍ່ພຽງແຕ່ຫໍ້ຫຸ້ມຜິວທ່ານດ້ວຍກິ່ນຫອມທີ່ນຸ້ມນວນ ແຕ່ຍັງບຳລຸງດ້ວຍວິຕາມິນ ແລະ ສານຕ້ານອະນຸມູນອິດສະລະຕາມທຳມະຊາດ — ໃຫ້ຜິວນຸ້ມນວນ, ຊຸ່ມຊື່ນ ແລະ ມີກິ່ນຫອມອັນນ່າຫຼົງໄຫຼ.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title lang-en">💧 How to Use</h2>
+            <h2 class="card-title lang-la">💧 ວິທີໃຊ້</h2>
+
+            <p class="description lang-en">Pump onto hands or a loofah, lather generously over the body, and rinse well. Suitable for daily use.</p>
+            <p class="description lang-la">ບີບໃສ່ຝ່າມືຫຼືຟອງນ້ຳ, ຖູໃຫ້ເປັນຟອງທົ່ວຮ່າງກາຍ, ແລ້ວລ້າງອອກໃຫ້ສະອາດ. ເໝາະສຳລັບການໃຊ້ທຸກໆວັນ.</p>
+
+            <div style="margin-top: 30px; padding: 20px; background-color: var(--bg-color); border-radius: 8px;">
+                <p class="description lang-en" style="font-style: italic;">✨ "Transform your daily shower into a soothing ritual."</p>
+                <p class="description lang-la" style="font-style: italic;">✨ "ປ່ຽນການອາບນ້ຳປະຈຳວັນຂອງທ່ານໃຫ້ກາຍເປັນຄວາມຜ່ອນຄາຍ."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="slogan lang-en">Gentle enough for everyday. Powerful enough to glow.</p>
+        <p class="slogan lang-la">ອ່ອນໂຍນທຸກວັນ ເປັ່ງປະກາຍທຸກຄັ້ງ</p>
+        <p style="margin-top: 15px; font-size: 0.8rem; color: var(--text-muted);">© Maison TADAM. All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script>
+    // Image Switcher
+    function switchImage(filename, element) {
+        const currentImg = document.getElementById('current-img');
+        currentImg.src = filename;
+        document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    // Language Toggle
+    function setLanguage(lang) {
+        const enElements = document.querySelectorAll('.lang-en');
+        const laElements = document.querySelectorAll('.lang-la');
+        const buttons = document.querySelectorAll('.lang-btn');
+
+        if (lang === 'la') {
+            enElements.forEach(el => el.style.display = 'none');
+            laElements.forEach(el => el.style.display = 'block');
+            buttons[0].classList.remove('active');
+            buttons[1].classList.add('active');
+        } else {
+            laElements.forEach(el => el.style.display = 'none');
+            enElements.forEach(el => el.style.display = 'block');
+            buttons[1].classList.remove('active');
+            buttons[0].classList.add('active');
+        }
+    }
+
+    // Interactive Hover Zoom
+    const zoomBox = document.getElementById('zoom-box');
+    const zoomImg = document.getElementById('current-img');
+
+    zoomBox.addEventListener('mousemove', (e) => {
+        const rect = zoomBox.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const xPercent = (x / rect.width) * 100;
+        const yPercent = (y / rect.height) * 100;
+
+        zoomImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        zoomImg.style.transform = 'scale(2)';
+    });
+
+    zoomBox.addEventListener('mouseleave', () => {
+        zoomImg.style.transform = 'scale(1)';
+        zoomImg.style.transformOrigin = 'center center';
+    });
+</script>
+
+</body>
+</html>
